@@ -26,7 +26,7 @@ const ChakraBox = chakra(motion.div, {
 
 const Home: NextPage = () => {
   const {isOpen, onOpen, onClose} = useDisclosure();
-  const btnRef = React.useRef();
+  const btnRef = React.useRef(null);
 
   return (
     <Layout>
