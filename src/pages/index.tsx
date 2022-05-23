@@ -54,7 +54,7 @@ const Home: NextPage = () => {
         width='100px'
         height='100px'
       >
-        I'm Dizzy!
+        I{"'"}m Dizzy!
       </ChakraBox>
       <Drawer isOpen={isOpen} placement='right' onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />
