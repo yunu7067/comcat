@@ -13,7 +13,7 @@ import {
   chakra,
 } from '@chakra-ui/react';
 import React from 'react';
-import Layout from '../blocks/Layout';
+import DefaultLayout from '../blocks/layout/DefaultLayout';
 import {motion, isValidMotionProp} from 'framer-motion';
 
 const ChakraBox = chakra(motion.div, {
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
   const btnRef = React.useRef(null);
 
   return (
-    <Layout>
+    <DefaultLayout>
       <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
         Open
       </Button>
@@ -103,7 +103,7 @@ const Home: NextPage = () => {
           <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
         </a>
       </div>
-    </Layout>
+    </DefaultLayout>
   );
 };
 
