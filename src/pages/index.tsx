@@ -26,7 +26,7 @@ const ChakraBox = chakra(motion.div, {
 
 const Home: NextPage = () => {
   const {isOpen, onOpen, onClose} = useDisclosure();
-  const btnRef = React.useRef();
+  const btnRef = React.useRef(null);
 
   return (
     <Layout>
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
         width='100px'
         height='100px'
       >
-        I'm Dizzy!
+        I{"'"}m Dizzy!
       </ChakraBox>
       <Drawer isOpen={isOpen} placement='right' onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />
