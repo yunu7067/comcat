@@ -11,11 +11,13 @@ import {
   Button,
   SlideDirection,
   useMediaQuery,
-  VStack,
-  HStack,
   Box,
+  IconButton,
+  Center,
+  HStack,
 } from '@chakra-ui/react';
 import type {FocusableElement} from '@chakra-ui/utils';
+import {HamburgerMenuIcon} from '@radix-ui/react-icons';
 
 interface DrawerProps {
   isOpen: boolean;
@@ -27,30 +29,34 @@ interface DrawerProps {
 
 const SideNav: React.FC<DrawerProps> = ({isOpen, finalFocusRef, placement, onClose, children}) => {
   const [isLargerThan1280] = useMediaQuery('(min-width: 1280px)');
-  const [extend, setExtend] = useState(true); // 확장 상태인지 축소 상태인지(데스크톱)
-  const [open, setOpen] = useState(false); // 열린상태인지 닫힌 상태인지 (모바일)
 
   if (isLargerThan1280) {
-    return <Box w='72'>yessssssss</Box>;
+    return (
+      <Box w='full' maxW='320px' h='full'>
+        {children}
+      </Box>
+    );
   } else {
     return (
       <Drawer isOpen={isOpen} placement={placement} onClose={onClose} finalFocusRef={finalFocusRef}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader py='0'>
+            <HStack h='16' spacing='2' fontSize='medium' fontWeight='normal'>
+              <Center w='72px' h='full' flex='none'>
+                <IconButton
+                  onClick={onClose}
+                  variant='ghost'
+                  borderRadius='full'
+                  aria-label='Menu'
+                  icon={<HamburgerMenuIcon width='20' height='20' />}
+                />
+              </Center>
+              <Center flex='none'>댓글고양이</Center>
+            </HStack>
+          </DrawerHeader>
 
-          <DrawerBody>
-            {children}
-            <Input placeholder='Type here...' />
-          </DrawerBody>
-
-          <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
-          </DrawerFooter>
+          <DrawerBody p='0'>{children}</DrawerBody>
         </DrawerContent>
       </Drawer>
     );

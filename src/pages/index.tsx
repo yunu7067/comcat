@@ -1,8 +1,10 @@
 import type {NextPage} from 'next';
-import {chakra} from '@chakra-ui/react';
+import {Box, chakra, HStack, VStack} from '@chakra-ui/react';
 import React from 'react';
 import DefaultLayout from '../blocks/layout/DefaultLayout';
 import {motion, isValidMotionProp} from 'framer-motion';
+import useSWR from 'swr';
+import {Boradcast} from '../services/Broadcast';
 
 const ChakraBox = chakra(motion.div, {
   /**
@@ -12,62 +14,32 @@ const ChakraBox = chakra(motion.div, {
   shouldForwardProp: prop => isValidMotionProp(prop) || prop === 'children',
 });
 
+const fetcher = (url: string) => fetch(url).then(res => res.json());
+
 const Home: NextPage = () => {
+  const {data, error} = useSWR<Boradcast[]>('/api/broadcast/list', fetcher);
+
   return (
     <DefaultLayout>
-      <ChakraBox
-        animate={{
-          scale: [1, 2, 2, 1, 1],
-          rotate: [0, 0, 270, 270, 0],
-          borderRadius: ['20%', '20%', '50%', '50%', '20%'],
-        }}
-        // @ts-ignore no problem in operation, although type error appears.
-        transition={{
-          duration: 3,
-          ease: 'easeInOut',
-          repeat: Infinity,
-          repeatType: 'loop',
-        }}
-        padding='2'
-        bgGradient='linear(to-l, #7928CA, #FF0080)'
-        display='flex'
-        justifyContent='center'
-        alignItems='center'
-        width='100px'
-        height='100px'
-      >
-        I{"'"}m Dizzy!
-      </ChakraBox>
-
-      <h1>
-        Welcome to <a href='https://nextjs.org'>Next.js!</a>
-      </h1>
-
-      <p>
-        Get started by editing <code>pages/index.tsx</code>
-      </p>
-
-      <div>
-        <a href='https://nextjs.org/docs'>
-          <h2>Documentation &rarr;</h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a href='https://nextjs.org/learn'>
-          <h2>Learn &rarr;</h2>
-          <p>Learn about Next.js in an interactive course with quizzes!</p>
-        </a>
-
-        <a href='https://github.com/vercel/next.js/tree/canary/examples'>
-          <h2>Examples &rarr;</h2>
-          <p>Discover and deploy boilerplate example Next.js projects.</p>
-        </a>
-
-        <a href='https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'>
-          <h2>Deploy &rarr;</h2>
-          <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
-        </a>
-      </div>
+      <VStack>
+        {data &&
+          data.map(broadcast => (
+            <HStack w='full' key={broadcast.id} p='4' border='1px'>
+              <iframe
+                width='192'
+                height='108'
+                src={`https://www.youtube.com/embed/${broadcast.id}`}
+                title='YouTube video player'
+                frameBorder='0'
+                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+              ></iframe>
+              <VStack w='full'>
+                <Box w='full'>{broadcast.title}</Box>
+                <Box w='full'>{broadcast.description}</Box>
+              </VStack>
+            </HStack>
+          ))}
+      </VStack>
     </DefaultLayout>
   );
 };

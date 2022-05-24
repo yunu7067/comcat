@@ -1,7 +1,15 @@
-import {Box, Center, HStack, VStack, useDisclosure, IconButton, Avatar} from '@chakra-ui/react';
-import {HamburgerMenuIcon} from '@radix-ui/react-icons';
+import {Box, Center, HStack, VStack, useDisclosure, IconButton, Avatar, StackDivider, Link} from '@chakra-ui/react';
+import {
+  CircleBackslashIcon,
+  HamburgerMenuIcon,
+  HomeIcon,
+  StarFilledIcon,
+  GearIcon,
+  ClockIcon,
+} from '@radix-ui/react-icons';
 import Head from 'next/head';
-import React, {useRef} from 'react';
+import NextLink from 'next/link';
+import React from 'react';
 import SideNav from './SideNav';
 
 interface LayoutProps {
@@ -9,8 +17,8 @@ interface LayoutProps {
 }
 
 const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
-  const {isOpen, onOpen, onClose} = useDisclosure();
-  const menuBtnRef = useRef(null);
+  const {isOpen, onOpen, onClose, onToggle} = useDisclosure();
+  const menuBtnRef = React.useRef(null);
 
   return (
     <>
@@ -25,7 +33,7 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
           <Center w='72px' h='full' flex='none'>
             <IconButton
               ref={menuBtnRef}
-              onClick={onOpen}
+              onClick={onToggle}
               variant='ghost'
               borderRadius='full'
               aria-label='Menu'
@@ -33,18 +41,87 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
             />
           </Center>
           <Center h='full' flex='none'>
-            title
+            댓글고양이
           </Center>
           <Center w='full' h='full' flex='auto'>
             actions
           </Center>
-          <Center pr='4'>
+          <Center pr='8'>
             <Avatar size='sm' />
           </Center>
         </HStack>
         <HStack h='full' w='full' flex='auto' spacing='0'>
           <SideNav isOpen={isOpen} placement='left' onClose={onClose} finalFocusRef={menuBtnRef}>
-            test
+            <VStack align='stretch' divider={<StackDivider borderColor='gray.200' />}>
+              <VStack align='stretch'>
+                <Box>
+                  <Link>
+                    <NextLink href='/' passHref>
+                      <HStack
+                        h='40px'
+                        paddingX='4'
+                        _hover={{
+                          background: 'gray.100',
+                        }}
+                      >
+                        <HomeIcon />
+                        <Box>홈</Box>
+                      </HStack>
+                    </NextLink>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link>
+                    <NextLink href='/' passHref>
+                      <HStack
+                        h='40px'
+                        paddingX='4'
+                        _hover={{
+                          background: 'gray.100',
+                        }}
+                      >
+                        <StarFilledIcon />
+                        <Box>즐겨찾기한 동영상</Box>
+                      </HStack>
+                    </NextLink>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link>
+                    <NextLink href='/' passHref>
+                      <HStack
+                        h='40px'
+                        paddingX='4'
+                        _hover={{
+                          background: 'gray.100',
+                        }}
+                      >
+                        <ClockIcon />
+                        <Box>나중에 볼 동영상</Box>
+                      </HStack>
+                    </NextLink>
+                  </Link>
+                </Box>
+              </VStack>
+              <VStack align='stretch'>
+                <Box>
+                  <Link>
+                    <NextLink href='/' passHref>
+                      <HStack
+                        h='40px'
+                        paddingX='4'
+                        _hover={{
+                          background: 'gray.100',
+                        }}
+                      >
+                        <GearIcon />
+                        <Box>설정</Box>
+                      </HStack>
+                    </NextLink>
+                  </Link>
+                </Box>
+              </VStack>
+            </VStack>
           </SideNav>
           <Box as='main' h='full' flex='auto' background='gray.50'>
             {children}
