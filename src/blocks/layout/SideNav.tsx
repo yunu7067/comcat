@@ -37,7 +37,7 @@ const SideNav: React.FC<DrawerProps> = ({isOpen, finalFocusRef, placement, onClo
       <Drawer isOpen={isOpen} placement={placement} onClose={onClose} finalFocusRef={finalFocusRef}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader py='0'>
+          <DrawerHeader px='0' py='0'>
             <HStack h='16' spacing='2' fontSize='medium' fontWeight='normal'>
               <Center w='72px' h='full' flex='none'>
                 <IconButton

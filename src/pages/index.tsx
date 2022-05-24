@@ -28,7 +28,7 @@ const Home: NextPage = () => {
             <LinkBox as='article' w='full' p='5' borderWidth='1px' rounded='md' key={broadcast.id}>
               <NextLink href={`/watch?video=${broadcast.id}`} passHref>
                 <LinkOverlay href='#'>
-                  <HStack w='full' p='4'>
+                  <HStack w='full' p='4' flexDirection={['column', 'row']}>
                     <iframe
                       width='192'
                       height='108'

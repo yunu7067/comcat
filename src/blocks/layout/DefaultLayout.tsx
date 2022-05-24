@@ -32,7 +32,7 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
       </Head>
 
       <VStack height='100vh' spacing='0'>
-        <HStack as='header' w='full' h='16' flex='none' spacing='2'>
+        <HStack as='header' w='full' h='16' flex='none' spacing='2' zIndex='1'>
           <Center w='72px' h='full' flex='none'>
             <IconButton
               ref={menuBtnRef}
@@ -53,7 +53,7 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
             <Avatar size='sm' />
           </Center>
         </HStack>
-        <HStack h='full' w='full' flex='auto' spacing='0'>
+        <HStack h='full' w='full' flex='auto' spacing='0' alignItems='start'>
           <SideNav isOpen={isOpen} placement='left' onClose={onClose} finalFocusRef={menuBtnRef}>
             <VStack align='stretch' divider={<StackDivider borderColor='gray.200' />}>
               <VStack align='stretch'>
@@ -158,7 +158,7 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
               </VStack>
             </VStack>
           </SideNav>
-          <Box as='main' h='full' flex='auto' background='gray.50'>
+          <Box as='main' w='full' h='fit-content' minH='full' flex='auto' background='gray.50'>
             {children}
           </Box>
         </HStack>
