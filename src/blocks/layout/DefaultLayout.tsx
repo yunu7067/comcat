@@ -32,7 +32,7 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
       </Head>
 
       <VStack height='100vh' spacing='0'>
-        <HStack as='header' w='full' h='16' spacing='2'>
+        <HStack as='header' w='full' h='16' flex='none' spacing='2'>
           <Center w='72px' h='full' flex='none'>
             <IconButton
               ref={menuBtnRef}
