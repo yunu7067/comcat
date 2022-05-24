@@ -1,10 +1,11 @@
 import type {NextPage} from 'next';
-import {Box, chakra, HStack, VStack} from '@chakra-ui/react';
+import {Box, chakra, HStack, Link, LinkBox, LinkOverlay, VStack} from '@chakra-ui/react';
 import React from 'react';
-import DefaultLayout from '../blocks/layout/DefaultLayout';
 import {motion, isValidMotionProp} from 'framer-motion';
 import useSWR from 'swr';
-import {Boradcast} from '../services/Broadcast';
+import {BoradcastRoom} from '@services/Broadcast';
+import DefaultLayout from '@blocks/layout/DefaultLayout';
+import NextLink from 'next/link';
 
 const ChakraBox = chakra(motion.div, {
   /**
@@ -17,27 +18,33 @@ const ChakraBox = chakra(motion.div, {
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 const Home: NextPage = () => {
-  const {data, error} = useSWR<Boradcast[]>('/api/broadcast/list', fetcher);
+  const {data, error} = useSWR<BoradcastRoom[]>('/api/broadcast/room/list', fetcher);
 
   return (
     <DefaultLayout>
-      <VStack>
+      <VStack p='4'>
         {data &&
           data.map(broadcast => (
-            <HStack w='full' key={broadcast.id} p='4' border='1px'>
-              <iframe
-                width='192'
-                height='108'
-                src={`https://www.youtube.com/embed/${broadcast.id}`}
-                title='YouTube video player'
-                frameBorder='0'
-                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-              ></iframe>
-              <VStack w='full'>
-                <Box w='full'>{broadcast.title}</Box>
-                <Box w='full'>{broadcast.description}</Box>
-              </VStack>
-            </HStack>
+            <LinkBox as='article' w='full' p='5' borderWidth='1px' rounded='md' key={broadcast.id}>
+              <NextLink href='/watch/' passHref>
+                <LinkOverlay href='#'>
+                  <HStack w='full' p='4'>
+                    <iframe
+                      width='192'
+                      height='108'
+                      src={`https://www.youtube.com/embed/${broadcast.id}`}
+                      title='YouTube video player'
+                      frameBorder='0'
+                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                    ></iframe>
+                    <VStack w='full'>
+                      <Box w='full'>{broadcast.title}</Box>
+                      <Box w='full'>{broadcast.description}</Box>
+                    </VStack>
+                  </HStack>
+                </LinkOverlay>
+              </NextLink>
+            </LinkBox>
           ))}
       </VStack>
     </DefaultLayout>

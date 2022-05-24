@@ -16,7 +16,7 @@ import React from 'react';
 import SideNav from './SideNav';
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode | undefined;
 }
 
 const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
