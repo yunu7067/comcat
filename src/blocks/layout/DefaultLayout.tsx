@@ -6,6 +6,9 @@ import {
   StarFilledIcon,
   GearIcon,
   ClockIcon,
+  StarIcon,
+  RocketIcon,
+  ArchiveIcon,
 } from '@radix-ui/react-icons';
 import Head from 'next/head';
 import NextLink from 'next/link';
@@ -80,7 +83,39 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
                           background: 'gray.100',
                         }}
                       >
-                        <StarFilledIcon />
+                        <RocketIcon />
+                        <Box>실시간</Box>
+                      </HStack>
+                    </NextLink>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link>
+                    <NextLink href='/' passHref>
+                      <HStack
+                        h='40px'
+                        paddingX='4'
+                        _hover={{
+                          background: 'gray.100',
+                        }}
+                      >
+                        <ArchiveIcon />
+                        <Box>아카이브</Box>
+                      </HStack>
+                    </NextLink>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link>
+                    <NextLink href='/' passHref>
+                      <HStack
+                        h='40px'
+                        paddingX='4'
+                        _hover={{
+                          background: 'gray.100',
+                        }}
+                      >
+                        <StarIcon />
                         <Box>즐겨찾기한 동영상</Box>
                       </HStack>
                     </NextLink>
@@ -106,7 +141,7 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
               <VStack align='stretch'>
                 <Box>
                   <Link>
-                    <NextLink href='/' passHref>
+                    <NextLink href='/setting' passHref>
                       <HStack
                         h='40px'
                         paddingX='4'
