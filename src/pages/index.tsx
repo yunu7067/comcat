@@ -26,20 +26,20 @@ const Home: NextPage = () => {
         {data &&
           data.map(broadcast => (
             <LinkBox as='article' w='full' p='5' borderWidth='1px' rounded='md' key={broadcast.id}>
-              <NextLink href='/watch/' passHref>
+              <NextLink href={`/watch?video=${broadcast.id}`} passHref>
                 <LinkOverlay href='#'>
                   <HStack w='full' p='4'>
                     <iframe
                       width='192'
                       height='108'
-                      src={`https://www.youtube.com/embed/${broadcast.id}`}
+                      src={`https://www.youtube.com/embed/${broadcast.video.id}`}
                       title='YouTube video player'
                       frameBorder='0'
                       allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                     ></iframe>
                     <VStack w='full'>
-                      <Box w='full'>{broadcast.title}</Box>
-                      <Box w='full'>{broadcast.description}</Box>
+                      <Box w='full'>{broadcast.video.title}</Box>
+                      <Box w='full'>{broadcast.video.description}</Box>
                     </VStack>
                   </HStack>
                 </LinkOverlay>
