@@ -52,7 +52,7 @@ const SideNav: React.FC<DrawerProps> = ({isOpen, finalFocusRef, placement, onClo
                   icon={<HamburgerMenuIcon width='20' height='20' />}
                 />
               </Center>
-              <Center flex='none'>title</Center>
+              <Center flex='none'>댓글고양이</Center>
             </HStack>
           </DrawerHeader>
 

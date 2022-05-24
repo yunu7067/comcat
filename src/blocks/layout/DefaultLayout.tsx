@@ -1,16 +1,12 @@
+import {Box, Center, HStack, VStack, useDisclosure, IconButton, Avatar, StackDivider, Link} from '@chakra-ui/react';
 import {
-  Box,
-  Center,
-  HStack,
-  VStack,
-  useDisclosure,
-  IconButton,
-  Avatar,
-  StackDivider,
-  LinkBox,
-  Link,
-} from '@chakra-ui/react';
-import {CircleBackslashIcon, HamburgerMenuIcon, HomeIcon, GearIcon} from '@radix-ui/react-icons';
+  CircleBackslashIcon,
+  HamburgerMenuIcon,
+  HomeIcon,
+  StarFilledIcon,
+  GearIcon,
+  ClockIcon,
+} from '@radix-ui/react-icons';
 import Head from 'next/head';
 import NextLink from 'next/link';
 import React from 'react';
@@ -45,7 +41,7 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
             />
           </Center>
           <Center h='full' flex='none'>
-            title
+            댓글고양이
           </Center>
           <Center w='full' h='full' flex='auto'>
             actions
@@ -84,8 +80,8 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
                           background: 'gray.100',
                         }}
                       >
-                        <CircleBackslashIcon />
-                        <Box>목록2</Box>
+                        <StarFilledIcon />
+                        <Box>즐겨찾기한 동영상</Box>
                       </HStack>
                     </NextLink>
                   </Link>
@@ -100,8 +96,8 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
                           background: 'gray.100',
                         }}
                       >
-                        <CircleBackslashIcon />
-                        <Box>목록3</Box>
+                        <ClockIcon />
+                        <Box>나중에 볼 동영상</Box>
                       </HStack>
                     </NextLink>
                   </Link>
