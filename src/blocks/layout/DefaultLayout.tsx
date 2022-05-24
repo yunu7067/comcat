@@ -1,12 +1,29 @@
-import {Box, Center, HStack, VStack} from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  HStack,
+  VStack,
+  useDisclosure,
+  IconButton,
+  Avatar,
+  StackDivider,
+  LinkBox,
+  Link,
+} from '@chakra-ui/react';
+import {CircleBackslashIcon, HamburgerMenuIcon, HomeIcon, GearIcon} from '@radix-ui/react-icons';
 import Head from 'next/head';
+import NextLink from 'next/link';
 import React from 'react';
+import SideNav from './SideNav';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
+  const {isOpen, onOpen, onClose, onToggle} = useDisclosure();
+  const menuBtnRef = React.useRef(null);
+
   return (
     <>
       <Head>
@@ -15,22 +32,102 @@ const DefaultLayout: React.FC<LayoutProps> = ({children}) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <VStack spacing='0'>
-        <HStack as='header' w='full' h='16' spacing='0' borderBottom={'1px'}>
-          <Center h='full' w='52'>
+      <VStack height='100vh' spacing='0'>
+        <HStack as='header' w='full' h='16' spacing='2'>
+          <Center w='72px' h='full' flex='none'>
+            <IconButton
+              ref={menuBtnRef}
+              onClick={onToggle}
+              variant='ghost'
+              borderRadius='full'
+              aria-label='Menu'
+              icon={<HamburgerMenuIcon width='20' height='20' />}
+            />
+          </Center>
+          <Center h='full' flex='none'>
             title
           </Center>
-          <Center h='full' borderLeft={'1px'}>
+          <Center w='full' h='full' flex='auto'>
             actions
+          </Center>
+          <Center pr='8'>
+            <Avatar size='sm' />
           </Center>
         </HStack>
         <HStack h='full' w='full' flex='auto' spacing='0'>
-          <VStack as='nav' h='full' w='52'>
-            <Center w='full' flex='auto'>
-              nav
-            </Center>
-          </VStack>
-          <Box as='main' h='full' flex='auto' borderLeft={'1px'}>
+          <SideNav isOpen={isOpen} placement='left' onClose={onClose} finalFocusRef={menuBtnRef}>
+            <VStack align='stretch' divider={<StackDivider borderColor='gray.200' />}>
+              <VStack align='stretch'>
+                <Box>
+                  <Link>
+                    <NextLink href='/' passHref>
+                      <HStack
+                        h='40px'
+                        paddingX='4'
+                        _hover={{
+                          background: 'gray.100',
+                        }}
+                      >
+                        <HomeIcon />
+                        <Box>홈</Box>
+                      </HStack>
+                    </NextLink>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link>
+                    <NextLink href='/' passHref>
+                      <HStack
+                        h='40px'
+                        paddingX='4'
+                        _hover={{
+                          background: 'gray.100',
+                        }}
+                      >
+                        <CircleBackslashIcon />
+                        <Box>목록2</Box>
+                      </HStack>
+                    </NextLink>
+                  </Link>
+                </Box>
+                <Box>
+                  <Link>
+                    <NextLink href='/' passHref>
+                      <HStack
+                        h='40px'
+                        paddingX='4'
+                        _hover={{
+                          background: 'gray.100',
+                        }}
+                      >
+                        <CircleBackslashIcon />
+                        <Box>목록3</Box>
+                      </HStack>
+                    </NextLink>
+                  </Link>
+                </Box>
+              </VStack>
+              <VStack align='stretch'>
+                <Box>
+                  <Link>
+                    <NextLink href='/' passHref>
+                      <HStack
+                        h='40px'
+                        paddingX='4'
+                        _hover={{
+                          background: 'gray.100',
+                        }}
+                      >
+                        <GearIcon />
+                        <Box>설정</Box>
+                      </HStack>
+                    </NextLink>
+                  </Link>
+                </Box>
+              </VStack>
+            </VStack>
+          </SideNav>
+          <Box as='main' h='full' flex='auto' background='gray.50'>
             {children}
           </Box>
         </HStack>

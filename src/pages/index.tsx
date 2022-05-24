@@ -1,17 +1,5 @@
 import type {NextPage} from 'next';
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Button,
-  Input,
-  useDisclosure,
-  chakra,
-} from '@chakra-ui/react';
+import {chakra} from '@chakra-ui/react';
 import React from 'react';
 import DefaultLayout from '../blocks/layout/DefaultLayout';
 import {motion, isValidMotionProp} from 'framer-motion';
@@ -25,14 +13,8 @@ const ChakraBox = chakra(motion.div, {
 });
 
 const Home: NextPage = () => {
-  const {isOpen, onOpen, onClose} = useDisclosure();
-  const btnRef = React.useRef(null);
-
   return (
     <DefaultLayout>
-      <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
-        Open
-      </Button>
       <ChakraBox
         animate={{
           scale: [1, 2, 2, 1, 1],
@@ -56,24 +38,7 @@ const Home: NextPage = () => {
       >
         I{"'"}m Dizzy!
       </ChakraBox>
-      <Drawer isOpen={isOpen} placement='right' onClose={onClose} finalFocusRef={btnRef}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
 
-          <DrawerBody>
-            <Input placeholder='Type here...' />
-          </DrawerBody>
-
-          <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
       <h1>
         Welcome to <a href='https://nextjs.org'>Next.js!</a>
       </h1>
